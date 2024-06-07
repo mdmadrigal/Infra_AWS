@@ -1,5 +1,5 @@
 vpc_id=$(aws ec2 describe-vpcs --filters Name=isDefault,Values=true --query "Vpcs[0].VpcId" --output text)
-subnet_id=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$vpc_id Name=availabilityZone,Values=us-east-1a --query "Subnets[0].subnet-04cbb7f7050d5e7c0" --output text)
+subnet_id=$(aws ec2 describe-subnets --filters Name=vpc-id,Values=$vpc_id Name=availabilityZone,Values=us-east-1a --query "subnet-04cbb7f7050d5e7c0" --output text)
 security_group_id=$(aws ec2 describe-security-groups --group-names "SG-Linux" --query "SecurityGroups[0].GroupId" --output text 2>/dev/null)
 
 
