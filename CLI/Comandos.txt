@@ -1,0 +1,74 @@
+Criar S3   aws s3  mb s3://cloudmadrigal2.local
+
+Listar -   aws s3 ls
+
+Copiar arquivo  aws s3 cp f:\ti\aws\arquivo.txt  s3://cloudmadrigal2.local
+
+Apagar arquivo 
+aws s3 rm s3://cloudmadrigal.local/arquivo.txt 
+Com o --recursive remove todos os arquivos dentro do bucket
+
+Copiar pasta inteira
+
+aws s3 cp f:\ti\aws s3://cloudmadrigal.local --recursive
+
+Sincronizar
+
+aws s3 sync f:\ti\aws s3://cloudtreinamento.local 
+
+Download arquivo 
+
+aws s3 cp s3://cloudtreinamento.local c:\terraform
+
+
+---
+Comandos EC2
+
+aws ec2 describe-instances
+
+aws ec2 describe-instances  --query "Reservations[*].Instances[*].InstanceId*
+
+aws ec2 describe-instances  --filters "Name=Tag-values=ubuntu" --query "Reservations[*].Instances[*].InstanceId*
+
+aws ec2 describe-instances  --filters "Name=Tag-values=ubuntu" --query "Reservations[*].Instances[].PublicIpaddress"
+
+---
+Volume
+
+aws ec2 create-volume  --availability-zone us-east-1a  --size 3  --volume-type gp2
+
+aws ec2 attach-volume  --device "/dev/xvdb" --volume-id  vol-0d43c1cb7b048c68a  --instance-id i-09f9152a44b2e4475
+
+Checar se tem partição
+sudo file -s /dev/xvdb
+
+Criar partição
+sudo mkfs -t xfs /dev/xvdb
+
+Criar pasta
+sudo mkdir  /publico
+
+Montar volume
+sudo mount /dev/xvdb /publico
+
+df -h
+
+---
+
+Variáveis de Ambiente
+
+setx AWS_ACCESS_KEY_ID
+
+set   AWS_ACCESS_KEY_ID chave ou key
+setx AWS_ACCESS_DEFAULT_REGIONAL us-east-1
+
+AWS_CONFIG_FILE c:\site\.cloud\config
+
+---
+
+Configurar outra conta
+
+aws configure --profile conta
+
+Acessar S3 da contab
+aws s2 ls --profile contab
